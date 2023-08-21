@@ -2,14 +2,13 @@ contact
 login 
 favourite products 
 
-
 shop 
     {
         -> products
         -> categories
             men wear 
             women wear 
-            children wear  
+            children wear 
         -> price 
         -> size 
         -> colors
