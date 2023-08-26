@@ -25,7 +25,7 @@ def view_products(request):
                }
     return render(request, "shop/view_products.html",context)
 
-def product_details(request, id):
-    details = Shop.objects.get(id=id)
+def product_details(request, slug):
+    details = Shop.objects.get(slug=slug)
     context = {"product" : details}
     return render(request,"shop/product_details.html",context)

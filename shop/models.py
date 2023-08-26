@@ -1,5 +1,6 @@
+from typing import Iterable, Optional
 from django.db import models
-
+from django.utils.text import slugify
 # Create your models here.
 SIZE_OPTIONS = (
     ("small","small"),
@@ -30,7 +31,12 @@ class Shop(models.Model):  # --> table
     product_description = models.TextField(max_length=1000)
     image = models.ImageField(upload_to='product/')
 
+    slug = models.SlugField(blank=True, null=True)
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.product_title)
+        super(Shop,self).save(*args, **kwargs)
+    
     def __str__(self):
         return self.product_title
     
