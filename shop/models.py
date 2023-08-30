@@ -1,7 +1,7 @@
-from typing import Iterable, Optional
 from django.db import models
 from django.utils.text import slugify
 # Create your models here.
+
 SIZE_OPTIONS = (
     ("small","small"),
     ("meduiem","meduiem"),
@@ -16,9 +16,9 @@ COLOR_OPTIONS = (
 
 )
 
-# def customize_image(instance, file_name):
-#     sep = file_name.split(".")
-#     return "product/%s.%s"%(instance.id, sep[1])
+def customize_image(instance, file_name):
+    sep = file_name.split(".")
+    return "product/%s.%s"%(instance.id, sep[1])
 
 
 class Shop(models.Model):  # --> table 
@@ -29,7 +29,7 @@ class Shop(models.Model):  # --> table
     product_color = models.CharField(max_length=10,choices=COLOR_OPTIONS)
     categories = models.ForeignKey('Categoriey',on_delete=models.CASCADE)
     product_description = models.TextField(max_length=1000)
-    image = models.ImageField(upload_to='product/')
+    image = models.ImageField(upload_to=customize_image)
 
     slug = models.SlugField(blank=True, null=True)
 
@@ -44,4 +44,3 @@ class Categoriey(models.Model):
     name =  models.CharField(max_length=10) 
     def __str__(self):
         return self.name
-    

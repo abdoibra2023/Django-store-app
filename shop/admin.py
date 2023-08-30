@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Shop,Categoriey
+from .models import Shop, Categoriey
 # Register your models here.
 
 

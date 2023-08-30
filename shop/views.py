@@ -1,14 +1,17 @@
 from django.shortcuts import render
-from .models import Shop,Categoriey
+from .models import Shop, Categoriey
 from django.core.paginator import Paginator
 # Create your views here.
 
 def view_products(request):
     clothes = Shop.objects.all()
     clothes_categ = Categoriey.objects.all()
+
+    # this part for pagination 
     pagination = Paginator(clothes, 1)
     page_number = request.GET.get('page')
     page_obj = pagination.get_page(page_number)
+
     # count the avilable categorey 
     l = {}
     for prod_categ in clothes_categ:
@@ -17,11 +20,9 @@ def view_products(request):
             if prodct.categories == prod_categ:
                 counter += 1
         l[str(prod_categ)] = counter
-
-    # count the products size options
-    
+ 
     context = {"all_clothes" : page_obj,
-               "categ_avilable" : l
+               "categ_avilable" : l   # count the avilable categ
                }
     return render(request, "shop/view_products.html",context)
 

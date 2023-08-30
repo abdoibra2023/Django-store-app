@@ -2,9 +2,8 @@ contact
 login 
 favourite products 
 
-shop 
+shop (clothes)
     {
-        -> products
         -> categories
             men wear 
             women wear 
@@ -13,15 +12,16 @@ shop
         -> size 
         -> colors
         -> filter (reference)
+        -> become a vendor 
         
     }
 
 cart 
     {
-        -> products
-        -> price
+        -> check out 
         -> total price
-        -> remove product 
+        -> remove product
+        -> add product  
         -> features 
             -- copon 
     }
