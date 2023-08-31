@@ -10,6 +10,7 @@
 
     <div class="site-section">
       <div class="container">
+        
 
         <div class="row mb-5">
           <div class="col-md-9 order-2">
@@ -51,13 +52,13 @@
                   </figure>
                   <div class="block-4-text p-4">
                     <h3><a href="{% url 'products:details' prod.slug %}">{{prod}}</a></h3>
-                    <p class="mb-0">Finding perfect t-shirt</p>
+                    <p class="mb-0">by: {{prod.vendor_name}}</p>
                     <p class="text-primary font-weight-bold">{{prod.product_price}}$</p>
                   </div>
                 </div>
               </div>
               {% endfor %}
-
+            
 
             </div>
             {% if all_clothes.has_other_pages %}
@@ -70,8 +71,8 @@
                     {% endif %}
 
 
-                    {% for a in all_clothes.paginator.page_range %}
-                      <li class="active"><a href="?page={{a}}"><span>{{a}}</span></a></li>
+                    {% for b in all_clothes.paginator.page_range %}
+                      <li class="active"><a href="?page={{b}}">{{b}}</a></li>
                     {% endfor %}
 
 

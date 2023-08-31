@@ -30,3 +30,7 @@ def product_details(request, slug):
     details = Shop.objects.get(slug=slug)
     context = {"product" : details}
     return render(request,"shop/product_details.html",context)
+
+
+def add_product(request):
+    return render(request, "shop/add_product.html",{})

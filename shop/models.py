@@ -16,6 +16,7 @@ COLOR_OPTIONS = (
 
 )
 
+
 def customize_image(instance, file_name):
     sep = file_name.split(".")
     return "product/%s.%s"%(instance.id, sep[1])
@@ -23,24 +24,31 @@ def customize_image(instance, file_name):
 
 class Shop(models.Model):  # --> table 
     
-    product_title = models.CharField(max_length=20)
+    product_name = models.CharField(max_length=20) # --> column
     product_price = models.IntegerField()
     product_size = models.CharField(max_length=10,choices=SIZE_OPTIONS)
     product_color = models.CharField(max_length=10,choices=COLOR_OPTIONS)
     categories = models.ForeignKey('Categoriey',on_delete=models.CASCADE)
     product_description = models.TextField(max_length=1000)
     image = models.ImageField(upload_to=customize_image)
-
+    vendor_name = models.CharField(max_length=20)
     slug = models.SlugField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.product_title)
+        self.slug = slugify(self.product_name)
         super(Shop,self).save(*args, **kwargs)
     
     def __str__(self):
-        return self.product_title
+        return self.product_name
     
 class Categoriey(models.Model):
     name =  models.CharField(max_length=10) 
     def __str__(self):
         return self.name
+
+class VendorAdd(models.Model):
+    add_prod_name = models.CharField(max_length=20)
+    vendor_name = models.CharField(max_length=20)
+    vendor_email = models.EmailField()
+    upload_image = models.URLField()
+
