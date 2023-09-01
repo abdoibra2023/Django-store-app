@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Shop, Categoriey
+from .models import Shop, Categoriey, VendorAdd
+from .forms import VendorAddForm
 from django.core.paginator import Paginator
 # Create your views here.
 
@@ -24,13 +25,20 @@ def view_products(request):
     context = {"all_clothes" : page_obj,
                "categ_avilable" : l   # count the avilable categ
                }
-    return render(request, "shop/view_products.html",context)
+    return render(request, "shop/view_products.html", context)
 
 def product_details(request, slug):
     details = Shop.objects.get(slug=slug)
     context = {"product" : details}
-    return render(request,"shop/product_details.html",context)
+    return render(request,"shop/product_details.html", context)
 
 
 def add_product(request):
-    return render(request, "shop/add_product.html",{})
+    if request.method == 'POST':
+        pass
+    else:
+        form = VendorAddForm()
+
+
+    context = {"forms" : form}
+    return render(request, "shop/add_product.html", context)

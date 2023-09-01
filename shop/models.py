@@ -48,7 +48,15 @@ class Categoriey(models.Model):
 
 class VendorAdd(models.Model):
     add_prod_name = models.CharField(max_length=20)
-    vendor_name = models.CharField(max_length=20)
+    company_name = models.CharField(max_length=20)
     vendor_email = models.EmailField()
-    upload_image = models.URLField()
-
+    product_images = models.ImageField(upload_to='vendor_images/')
+    product_description = models.TextField(max_length=1000)
+    product_price = models.IntegerField()
+    product_categ = models.ForeignKey(Categoriey, on_delete=models.CASCADE, related_name='prod_categ')
+    created_at = models.DateTimeField(auto_now=True)
+    # amount of this product and it's color 
+    
+    def __str__(self):
+        return self.add_prod_name
+    
