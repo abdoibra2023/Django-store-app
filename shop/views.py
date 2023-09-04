@@ -35,10 +35,11 @@ def product_details(request, slug):
 
 def add_product(request):
     if request.method == 'POST':
-        pass
+        form = VendorAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            this_form = form.save()
     else:
         form = VendorAddForm()
-
 
     context = {"forms" : form}
     return render(request, "shop/add_product.html", context)

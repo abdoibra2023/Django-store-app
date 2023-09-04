@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # my apps for the project 
     'shop',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
